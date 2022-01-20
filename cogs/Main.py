@@ -19,8 +19,8 @@ from discord.ext.commands import *
 
 owner = ["αrchιshα#5518", "notsniped#4573", "thatOneArchUser#5794"]
 oid = [706697300872921088, 738290097170153472, 705462972415213588]
-reddit = praw.Reddit(client_id='reddit_client_id',
-                     client_secret='reddit_client_secret',
+reddit = praw.Reddit(client_id='_pazwWZHi9JldA',
+                     client_secret='1tq1HM7UMEGIro6LlwtlmQYJ1jB4vQ',
                      user_agent='idk', check_for_async=False)
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
@@ -453,43 +453,40 @@ class MainCog(commands.Cog):
         await ctx.send(f'Client Latency: {round(self.bot.latency * 1000)}ms')
         print(f'[log] {ctx.author} requested ]ping.')
 
-    # fstab var
-    fstaburl1 = "https://cdn.discordapp.com/attachments/878297190576062515/879845618636423259/IMG_20210825_005111.jpg"
-    fstaburl2 = "https://media.discordapp.net/attachments/876826249820004385/884040441195003954/Screenshot_158.png"
-    fstaburl3 = "https://media.discordapp.net/attachments/915898952182796298/916626889165115422/Screenshot_2017-10-10-01-22-57_com.speedsoftware.explorer_1507591405249.jpg"
-    fstaburl4 = "https://media.discordapp.net/attachments/915898952182796298/916626889412599858/644b5b9e083e806173eabcde0b6b5f0c_720w.png"
-
     @commands.command()
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def fstab(self, ctx):
+        # fstab var
+        fstaburl1 = "https://cdn.discordapp.com/attachments/878297190576062515/879845618636423259/IMG_20210825_005111.jpg"
+        fstaburl2 = "https://media.discordapp.net/attachments/876826249820004385/884040441195003954/Screenshot_158.png"
+        fstaburl3 = "https://media.discordapp.net/attachments/915898952182796298/916626889165115422/Screenshot_2017-10-10-01-22-57_com.speedsoftware.explorer_1507591405249.jpg"
+        fstaburl4 = "https://media.discordapp.net/attachments/915898952182796298/916626889412599858/644b5b9e083e806173eabcde0b6b5f0c_720w.png"
         await ctx.send(random.choice([fstaburl1, fstaburl2, fstaburl3, fstaburl4]))
         print(f'[log] {ctx.author} requested ]fstab.')
-
-    # slist var
-    archlink = "<https://discord.gg/aw4AcZys6p>"
-    smlink = "<https://discord.gg/tJqDMucEYG>"
-    isolink = "<https://discord.gg/zTqZqQCcAg>"
 
     @commands.command(aliases=["serverlist", "slist"])
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def embed_2(self, ctx):
+        # slist var
+        archlink = "<https://discord.gg/aw4AcZys6p>"
+        smlink = "<https://discord.gg/tJqDMucEYG>"
+        isolink = "<https://discord.gg/zTqZqQCcAg>"
         embed=discord.Embed(title="**server list**", description="~~(101% not advertising)~~", color=0xFF5733)
-        embed.add_field(name=f"1. Arch Island (aka Hecker\'s Hub\):", value=f"{archlink}", inline=False)
-        embed.add_field(name=f"2. Scope Media (aka SM\):", value=f"{smlink}", inline=False)
+        embed.add_field(name=f"1. thatOneArchServer (aka Arch Island\):", value=f"{archlink}", inline=False)
+        embed.add_field(name=f"2. Scoped Media (aka SM\):", value=f"{smlink}", inline=False)
         embed.add_field(name=f"3. iso.bot (aka isobot\'s supporting server\):", value=f"{isolink}", inline=False)
         await ctx.send(embed=embed)
         print(f'[log] {ctx.author} requested ]serverlist.')
 
-    # bots var
-    archbot = "https://discord.com/api/oauth2/authorize?client_id=859869941535997972&permissions=8&scope=bot"
-    isobot = "https://discord.com/api/oauth2/authorize?client_id=896437848176230411&permissions=8&scope=bot"
-    isobot2 = "https://discord.com/oauth2/authorize?client_id=915488087554002956&permissions=8&scope=bot"
-
     @commands.command(aliases=["morebots", "bots"])
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def embed_3(self, ctx):
+        # bots var
+        archbot = "https://discord.com/api/oauth2/authorize?client_id=859869941535997972&permissions=8&scope=bot"
+        isobot = "https://discord.com/api/oauth2/authorize?client_id=896437848176230411&permissions=8&scope=bot"
+        isobot2 = "https://discord.com/oauth2/authorize?client_id=915488087554002956&permissions=8&scope=bot"
         embed=discord.Embed(title="**Discover more bots!**", description="~~(101% not advertising)~~", color=0xFF5733)
-        embed.add_field(name=f"1. Arch bot#6142 (aka Archbot\):", value=f"{archbot}", inline=False)
+        embed.add_field(name=f"1. thatOneArchBot#6142 (aka Archbot\):", value=f"{archbot}", inline=False)
         embed.add_field(name=f"2. isobot#6851 (aka Official isobot\):", value=f"{isobot}", inline=False)
         embed.add_field(name=f"3. iso6.9#4895 (aka isobot v6.9\):", value=f"{isobot2}", inline=False)
         await ctx.send(embed=embed)
