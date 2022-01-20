@@ -1,5 +1,5 @@
-# iso6.9-2.6stable (debloated)
-iso.bot is originally made by notsniped#4573. This is a remix of iso.bot by αrchιshα#5518.
+# iso6.9-cogs (debloated)
+This is a cogs version of iso6.9 by αrchιshα#5518.
 
 iso6.9 is a Discord bot written in Python and is used to make your Discord experience better! It is similar to iso.bot as it is a remix.
 
@@ -12,22 +12,18 @@ Invite link: https://discord.com/oauth2/authorize?client_id=915488087554002956&p
 # Insert token and id before running the code. 
 To run it, put the bot token inside:
 
-> token = "token"
-
-Also put your discord id in:
-
-> cid = "client_id"
-
-To get your id, run `?userinfo` or `auserinfo` (slash commands also works) in any servers with Dyno or Arcane and copy your bot's client ID.
+> bot.run = "token"
 
 In order to use reddit commands, put your Reddit client id and client secret in:
 
 > reddit = praw.Reddit(client_id='reddit_client_id',
                      client_secret='reddit_client_secret',
-                     user_agent='idk copied from thatOneArchUser', check_for_async=False)
+                     user_agent='idk', check_for_async=False)
 
 # Commands (for all versions in this repo)
 - Use `]help` to get command list, use `]ahelp` to get alias list.
+
+- Use `]cinfo` to get help on a specific command.
 
 - Admin commands are included (use `sudo help` to see detailed command list)
 
@@ -44,7 +40,9 @@ In order to use reddit commands, put your Reddit client id and client secret in:
 
 - Can do Maths!
 
-***ALL CODES ARE AUTHORIZED BY ISOBOT'S OWNERS (as we are partners?)***
+- Using cogs to improve performance
+
+***ALL CODES ARE AUTHORIZED BY ISOBOT AND ARCH BOT'S OWNERS (as we are partners?)***
 
 # Contacts
 Contact me:
