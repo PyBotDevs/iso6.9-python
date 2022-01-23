@@ -1,4 +1,5 @@
 # modules
+#lines 1461 -> 1173
 import os
 import random
 import discord
@@ -19,8 +20,8 @@ from discord.ext.commands import *
 
 owner = ["αrchιshα#5518", "notsniped#4573", "thatOneArchUser#5794"]
 oid = [706697300872921088, 738290097170153472, 705462972415213588]
-reddit = praw.Reddit(client_id='reddit_client_id',
-                     client_secret='reddit_client_secret',
+reddit = praw.Reddit(client_id='_pazwWZHi9JldA',
+                     client_secret='1tq1HM7UMEGIro6LlwtlmQYJ1jB4vQ',
                      user_agent='idk', check_for_async=False)
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
@@ -78,19 +79,174 @@ class ErrorHandler(commands.Cog):
 class MainCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+
     @commands.command(aliases=['help'])
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def embed(self, ctx):
-        embed=discord.Embed(title="**help command list of iso6.9**", description="version: 20012022a\ncurrent prefix: `]`", color=discord.Color.blue())
-        embed.add_field(name='moderation:', value="kick, ban, unban, purge, mute, unmute, warn, lock, unlock", inline=False)
-        embed.add_field(name='informative:', value="testcmd, ping, serverlist, morebots, serverinfo, userinfo, invites, avatar, cmdinfo", inline=False)
-        embed.add_field(name='misc:', value="snipe (channel), edit_snipe (global), 8ball, fstab, roll, say, null, sus, notify, stroke, randnum, kill, amogus, guess, duel, cup, lick, spam, encode, decode, stroktranslate, reddit, dungeon, hunt", inline=False)
-        embed.add_field(name='mathematics:', value="sum, subtract, multiply, divide, power, squareroot", inline=False)
-        embed.add_field(name='advanced maths:', value="quadratic, straightline", inline=False)
-        embed.add_field(name='administrator:', value="> use `sudo help` to get details about admin commands.", inline=False)
-        embed.set_footer(text="> type ]ahelp to get alias list.\n(Information requested by: {})".format(ctx.author))
-        await ctx.reply(embed=embed)
-        print(f'[log] {ctx.author} requested ]help.')
+    async def embed(self, ctx, search=None):
+        if search == None:
+            embed=discord.Embed(title="**help command list of iso6.9**", description="version: 20012022a\ncurrent prefix: `]`", color=discord.Color.blue())
+            embed.add_field(name='moderation:', value="kick, ban, unban, purge, mute, unmute, warn, lock, unlock", inline=False)
+            embed.add_field(name='informative:', value="testcmd, ping, serverlist, morebots, serverinfo, userinfo, invites, avatar, cmdinfo", inline=False)
+            embed.add_field(name='misc:', value="snipe (channel), edit_snipe (global), 8ball, fstab, roll, say, null, sus, notify, stroke, randnum, kill, amogus, guess, duel, cup, lick, spam, encode, decode, stroktranslate, reddit, dungeon, hunt", inline=False)
+            embed.add_field(name='mathematics:', value="sum, subtract, multiply, divide, power, squareroot", inline=False)
+            embed.add_field(name='advanced maths:', value="quadratic, straightline", inline=False)
+            embed.add_field(name='administrator:', value="> use `sudo help` to get details about admin commands.", inline=False)
+            embed.set_footer(text="> type ]ahelp to get alias list.\n(Information requested by: {})".format(ctx.author))
+            await ctx.reply(embed=embed)
+            print(f'[log] {ctx.author} requested ]help.')
+            return
+        # if search == "cmdinfo" or search == "cinfo":
+        #     embed=discord.Embed(title="\"cmdinfo\" command:", description="did you expected me to write something interesting here", color=discord.Color.blue())
+        #     embed.add_field(name=".", value='usage: `]cmdinfo <command_name_or_aliases>`\ncooldown (second): `none`\ncatagory: `informative`\naliases: `cinfo`', inline=False)
+        elif search == "help":
+            embed=discord.Embed(title="\"help\" command:", description="why do you even need help on help command", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]help`\ncooldown (second): `none`\ncatagory: `none`\naliases: `none`', inline=False)
+        elif search == "kick":
+            embed=discord.Embed(title="\"kick\" command:", description="kicks a user out the ~~Linux~~ server", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]kick <mention_user>/<user_id>/<user_name> [reason]`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
+        elif search == "ban":
+            embed=discord.Embed(title="\"ban\" command:", description="uses ban hammer on a user", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]ban <mention_user>/<user_id>/<user_name> [reason]`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
+        elif search == "unban":
+            embed=discord.Embed(title="\"unban\" command:", description="unbans a user from banned list ~~of not using Arch Linux~~", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]unban <mention_user>/<user_id>/<user_name>`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
+        elif search == "purge" or search == "clear":
+            embed=discord.Embed(title="\"purge\" command:", description="clears an amount of messages in the channel", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]purge <amount(int)>`\ncooldown (second): `3`\ncatagory: `moderation`\naliases: `clear`', inline=False)
+        elif search == "mute" or search == "shutup":
+            embed=discord.Embed(title="\"mute\" command:", description="mutes a user so that they can shut up", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]mute <mention_user>/<user_id>/<user_name> [reason]`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `shutup`', inline=False)
+        elif search == "unmute":
+            embed=discord.Embed(title="\"unmute\" command:", description="unmutes a user so they can be free to talk again", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]unmute <mention_user>/<user_id>/<user_name>`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
+        elif search == "warn":
+            embed=discord.Embed(title="\"warn\" command:", description="warns the user if they did something wrong", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]warn <mention_user>/<user_id>/<user_name> [reason]`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
+        elif search == "lock":
+            embed=discord.Embed(title="\"lock\" command:", description="locks specific channel so people are unable to talk in it", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]lock <mention_channel>/<channel_id>/<channel_name>`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
+        elif search == "unlock":
+            embed=discord.Embed(title="\"unlock\" command:", description="unlocks specific channel so people can talk in it again", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]unlock <mention_channel>/<channel_id>/<channel_name>`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
+        elif search == "ping":
+            embed=discord.Embed(title="\"ping\" command:", description="shows bot's ping", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]ping`\ncooldown (second): `5`\ncatagory: `informative`\naliases: `none`', inline=False)
+        elif search == "serverlist" or search == "slist":
+            embed=discord.Embed(title="\"serverlist\" command:", description="101% not advertising servers by the owner", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]serverlist`\ncooldown (second): `5`\ncatagory: `informative`\naliases: `slist`', inline=False)
+        elif search == "morebots" or search == "bots":
+            embed=discord.Embed(title="\"morebots\" command:", description="im 101% sure im not advertising my partner's bots", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]morebots`\ncooldown (second): `5`\ncatagory: `informative`\naliases: `bots`', inline=False)
+        elif search == "userinfo" or search == "whois":
+            embed=discord.Embed(title="\"userinfo\" command:", description="shows info about the user", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]userinfo <mention_user>/<user_id>/<user_name>`\ncooldown (second): `5`\ncatagory: `informative`\naliases: `whois`', inline=False)
+        elif search == "invites":
+            embed=discord.Embed(title="\"invites\" command:", description="shows a user's invited count (people)", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]invites [mention_user]/[user_id]`\ncooldown (second): `5`\ncatagory: `informative`\naliases: `none`', inline=False)
+        elif search == "avatar" or search == "av":
+            embed=discord.Embed(title="\"avatar\" command:", description="shows a user's avatar", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]avatar [mention_user]/[user_id]`\ncooldown (second): `5`\ncatagory: `informative`\naliases: `av`', inline=False)
+        elif search == "snipe":
+            embed=discord.Embed(title="\"snipe\" command:", description="snipes the last deleted message in current channel that you're in", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]snipe`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
+        elif search == "serverinfo" or search == "sinfo":
+            embed=discord.Embed(title="\"serverinfo\" command:", description="shows info about the server", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]serverinfo`\ncooldown (second): `5`\ncatagory: `informative`\naliases: `sinfo`', inline=False)
+        elif search == "edit_snipe":
+            embed=discord.Embed(title="\"edit_snipe\" command:", description="snipes the last edited message (sync in global)", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]edit_snipe`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
+        elif search == "8ball":
+            embed=discord.Embed(title="\"8ball\" command:", description="ask the bot something to get a response from it", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]8ball <question>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
+        elif search == "fstab":
+            embed=discord.Embed(title="\"fstab\" command:", description="fstab.goldfish", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]fstab`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
+        elif search == "roll":
+            embed=discord.Embed(title="\"roll\" command:", description="rolls dice", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]roll <number_of_dice> <sides_of_dice>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
+        elif search == "say":
+            embed=discord.Embed(title="\"say\" command:", description="makes the bot say something", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]say <message>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
+        elif search == "null":
+            embed=discord.Embed(title="\"null\" command:", description="imagine trying to get a null", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]null`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
+        elif search == "sus":
+            embed=discord.Embed(title="\"sus\" command:", description="you are sus", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]sus <mention_user>/<user_id>/<user_name>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
+        elif search == "stroke":
+            embed=discord.Embed(title="\"stroke\" command:", description="generates a stroke", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]stroke <length>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
+        elif search == "randnum" or search == "randgen":
+            embed=discord.Embed(title="\"randnum\" command:", description="a random number generator", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]randnum <minimum_value> <maximum_value>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `randgen`', inline=False)
+        elif search == "kill":
+            embed=discord.Embed(title="\"kill\" command:", description="kills specific user with custom weapon", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]kill <mention_user> <weapon>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
+        elif search == "amogus":
+            embed=discord.Embed(title="\"amogus\" command:", description="amogus twirk", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]amogus`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
+        elif search == "guess":
+            embed=discord.Embed(title="\"guess\" command:", description="the bot picks one number from 1 to 9, guess what it picked", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]guess <value>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
+        elif search == "duel":
+            embed=discord.Embed(title="\"duel\" command:", description="duels with other user (auto fight system btw)", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]duel <mention_user>/<user_id>/<user_name>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
+        elif search == "cup":
+            embed=discord.Embed(title="\"cup\" command:", description="the bot puts a ball in 1 of the 3 cups, guess which cup the ball is in", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]ball`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
+        elif search == "lick":
+            embed=discord.Embed(title="\"lick\" command:", description="a random nsfw command, why would you lick someone though", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]lick <mention_user>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
+        elif search == "encode" or search == "enc":
+            embed=discord.Embed(title="\"encode\" command:", description="encodes a message with Archiescript (about the method on encoding please ask thatOneArchUser#5794)", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]encode <message>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `enc`', inline=False)
+        elif search == "decode" or search == "dec":
+            embed=discord.Embed(title="\"decode\" command:", description="decodes a message encoded with Archiescript (about tge method on decoding please ask thatOneArchUser#5794)", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]decode <message>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `dec`', inline=False)
+        elif search == "stroktranslate" or search == "stroktrans":
+            embed=discord.Embed(title="\"stroktranslate\" command:", description="a translator that translates word strokes to another word stroke", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]stroktranslate <message>`\ncooldown (second): `none`\ncatagory: `misc`\naliases: `stroktrans`', inline=False)
+        elif search == "sum" or search == "+":
+            embed=discord.Embed(title="\"sum\" command:", description="sums up 2 or more numbers", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]sum <value1> <value2> [value3_or_more]`\ncooldown (second): `5`\ncatagory: `mathematics`\naliases: `+`', inline=False)
+        elif search == "subtract" or search == "-":
+            embed=discord.Embed(title="\"subtract\" command:", description="subtracts 2 or more numbers", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]subtract <value1> <value2> [value3_or_more]`\ncooldown (second): `5`\ncatagory: `mathematics`\naliases: `-`', inline=False)
+        elif search == "multiply" or search == "*":
+            embed=discord.Embed(title="\"multiply\" command:", description="multiplies 2 numbers", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]multiply <value1> <value2>`\ncooldown (second): `5`\ncatagory: `mathematics`\naliases: `*`', inline=False)
+        elif search == "divide" or search == "/":
+            embed=discord.Embed(title="\"divide\" command:", description="divides 2 numbers", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]divide <value1> <value2>`\ncooldown (second): `5`\ncatagory: `mathematics`\naliases: `/`', inline=False)
+        elif search == "power" or search == "**":
+            embed=discord.Embed(title="\"power\" command:", description="powers 2 numbers", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]power <value1> <value2>`\ncooldown (second): `5`\ncatagory: `mathematics`\naliases: `**`', inline=False)
+        elif search == "squareroot" or search == "sqrt":
+            embed=discord.Embed(title="\"squareroot\" command:", description="squareroots 1 number", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]squareroot <value>`\ncooldown (second): `5`\ncatagory: `mathematics`\naliases: `sqrt`', inline=False)
+        elif search == "quaduatic" or search == "quad":
+            embed=discord.Embed(title="\"quaduatic\" command:", description="solve a quaduatic equation by typing its a value, b value, and c value (y=ax^2+bx+c/y=a(x-h)^2+k)", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]quaduatic <a> <b> <c>`\ncooldown (second): `5`\ncatagory: `advanced maths`\naliases: `quad`', inline=False)
+        elif search == "straightline" or search == "stline":
+            embed=discord.Embed(title="\"straightline\" command:", description="find the details from a straight line equation (y=mx+c/ax+bx+c=0)", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]straightline <a> <b> <c>`\ncooldown (second): `5`\ncatagory: `advanced maths`\naliases: `stline`', inline=False)
+        elif search == "reddit":
+            embed=discord.Embed(title="\"reddit\" command:", description="gets a subreddit post", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]reddit <subreddit_name>`\ncooldown (second): `none`\ncatagory: `misc`\naliases: `none`', inline=False)
+        elif search == "dungeon":
+            embed=discord.Embed(title="\"dungeon\" command:", description="enters a dungeon", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]dungeon`\ncooldown (second): `none`\ncatagory: `misc`\naliases: `none`', inline=False)
+        elif search == "hunt":
+            embed=discord.Embed(title="\"hunt\" command:", description="goes for a hunt, difficulties are easy, normal, hard, and boss (secret difficulty and keys can also be accessed)", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]hunt <difficulty>`\ncooldown (second): `none`\ncatagory: `misc`\naliases: `none`', inline=False)
+        else:
+            await ctx.reply(f"no such command ({search})")
+            print(f"[log] {ctx.author} returned an error: Bad argument.")
+            return
+        embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
+        await ctx.send(embed=embed)
+        #print(f"[log] {ctx.author} requested ]cmdinfo.")
+        print(f"[log] {ctx.author} requested ]print.")
 
     @commands.command(aliases=['ahelp'])
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -105,300 +261,6 @@ class MainCog(commands.Cog):
         embed.set_footer(text='> type ]help to get the original list.\n(Information requested by: {})'.format(ctx.author))
         await ctx.reply(embed=embed)
         print(f'[log] {ctx.author} requested ]ahelp.')
-
-    @commands.command(aliases=['cinfo'])
-    async def cmdinfo(self, ctx, search: str):
-        if search == "cmdinfo" or search == "cinfo":
-            embed=discord.Embed(title="\"cmdinfo\" command:", description="did you expected me to write something interesting here", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]cmdinfo <command_name_or_aliases>`\ncooldown (second): `none`\ncatagory: `informative`\naliases: `cinfo`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "help":
-            embed=discord.Embed(title="\"help\" command:", description="why do you even need help on help command", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]help`\ncooldown (second): `none`\ncatagory: `none`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "kick":
-            embed=discord.Embed(title="\"kick\" command:", description="kicks a user out the ~~Linux~~ server", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]kick <mention_user>/<user_id>/<user_name> [reason]`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "ban":
-            embed=discord.Embed(title="\"ban\" command:", description="uses ban hammer on a user", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]ban <mention_user>/<user_id>/<user_name> [reason]`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "unban":
-            embed=discord.Embed(title="\"unban\" command:", description="unbans a user from banned list ~~of not using Arch Linux~~", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]unban <mention_user>/<user_id>/<user_name>`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "purge" or search == "clear":
-            embed=discord.Embed(title="\"purge\" command:", description="clears an amount of messages in the channel", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]purge <amount(int)>`\ncooldown (second): `3`\ncatagory: `moderation`\naliases: `clear`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "mute" or search == "shutup":
-            embed=discord.Embed(title="\"mute\" command:", description="mutes a user so that they can shut up", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]mute <mention_user>/<user_id>/<user_name> [reason]`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `shutup`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "unmute":
-            embed=discord.Embed(title="\"unmute\" command:", description="unmutes a user so they can be free to talk again", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]unmute <mention_user>/<user_id>/<user_name>`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "warn":
-            embed=discord.Embed(title="\"warn\" command:", description="warns the user if they did something wrong", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]warn <mention_user>/<user_id>/<user_name> [reason]`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "lock":
-            embed=discord.Embed(title="\"lock\" command:", description="locks specific channel so people are unable to talk in it", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]lock <mention_channel>/<channel_id>/<channel_name>`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "unlock":
-            embed=discord.Embed(title="\"unlock\" command:", description="unlocks specific channel so people can talk in it again", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]unlock <mention_channel>/<channel_id>/<channel_name>`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "ping":
-            embed=discord.Embed(title="\"ping\" command:", description="shows bot's ping", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]ping`\ncooldown (second): `5`\ncatagory: `informative`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "serverlist" or search == "slist":
-            embed=discord.Embed(title="\"serverlist\" command:", description="101% not advertising servers by the owner", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]serverlist`\ncooldown (second): `5`\ncatagory: `informative`\naliases: `slist`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "morebots" or search == "bots":
-            embed=discord.Embed(title="\"morebots\" command:", description="im 101% sure im not advertising my partner's bots", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]morebots`\ncooldown (second): `5`\ncatagory: `informative`\naliases: `bots`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "userinfo" or search == "whois":
-            embed=discord.Embed(title="\"userinfo\" command:", description="shows info about the user", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]userinfo <mention_user>/<user_id>/<user_name>`\ncooldown (second): `5`\ncatagory: `informative`\naliases: `whois`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "invites":
-            embed=discord.Embed(title="\"invites\" command:", description="shows a user's invited count (people)", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]invites [mention_user]/[user_id]`\ncooldown (second): `5`\ncatagory: `informative`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "avatar" or search == "av":
-            embed=discord.Embed(title="\"avatar\" command:", description="shows a user's avatar", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]avatar [mention_user]/[user_id]`\ncooldown (second): `5`\ncatagory: `informative`\naliases: `av`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "snipe":
-            embed=discord.Embed(title="\"snipe\" command:", description="snipes the last deleted message in current channel that you're in", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]snipe`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "serverinfo" or search == "sinfo":
-            embed=discord.Embed(title="\"serverinfo\" command:", description="shows info about the server", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]serverinfo`\ncooldown (second): `5`\ncatagory: `informative`\naliases: `sinfo`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "edit_snipe":
-            embed=discord.Embed(title="\"edit_snipe\" command:", description="snipes the last edited message (sync in global)", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]edit_snipe`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "8ball":
-            embed=discord.Embed(title="\"8ball\" command:", description="ask the bot something to get a response from it", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]8ball <question>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "fstab":
-            embed=discord.Embed(title="\"fstab\" command:", description="fstab.goldfish", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]fstab`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "roll":
-            embed=discord.Embed(title="\"roll\" command:", description="rolls dice", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]roll <number_of_dice> <sides_of_dice>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "say":
-            embed=discord.Embed(title="\"say\" command:", description="makes the bot say something", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]say <message>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "null":
-            embed=discord.Embed(title="\"null\" command:", description="imagine trying to get a null", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]null`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "sus":
-            embed=discord.Embed(title="\"sus\" command:", description="you are sus", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]sus <mention_user>/<user_id>/<user_name>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "stroke":
-            embed=discord.Embed(title="\"stroke\" command:", description="generates a stroke", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]stroke <length>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "randnum" or search == "randgen":
-            embed=discord.Embed(title="\"randnum\" command:", description="a random number generator", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]randnum <minimum_value> <maximum_value>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `randgen`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "kill":
-            embed=discord.Embed(title="\"kill\" command:", description="kills specific user with custom weapon", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]kill <mention_user> <weapon>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "amogus":
-            embed=discord.Embed(title="\"amogus\" command:", description="amogus twirk", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]amogus`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "guess":
-            embed=discord.Embed(title="\"guess\" command:", description="the bot picks one number from 1 to 9, guess what it picked", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]guess <value>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "duel":
-            embed=discord.Embed(title="\"duel\" command:", description="duels with other user (auto fight system btw)", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]duel <mention_user>/<user_id>/<user_name>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "cup":
-            embed=discord.Embed(title="\"cup\" command:", description="the bot puts a ball in 1 of the 3 cups, guess which cup the ball is in", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]ball`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "lick":
-            embed=discord.Embed(title="\"lick\" command:", description="a random nsfw command, why would you lick someone though", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]lick <mention_user>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "encode" or search == "enc":
-            embed=discord.Embed(title="\"encode\" command:", description="encodes a message with Archiescript (about the method on encoding please ask thatOneArchUser#5794)", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]encode <message>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `enc`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "decode" or search == "dec":
-            embed=discord.Embed(title="\"decode\" command:", description="decodes a message encoded with Archiescript (about tge method on decoding please ask thatOneArchUser#5794)", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]decode <message>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `dec`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "stroktranslate" or search == "stroktrans":
-            embed=discord.Embed(title="\"stroktranslate\" command:", description="a translator that translates word strokes to another word stroke", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]stroktranslate <message>`\ncooldown (second): `none`\ncatagory: `misc`\naliases: `stroktrans`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "sum" or search == "+":
-            embed=discord.Embed(title="\"sum\" command:", description="sums up 2 or more numbers", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]sum <value1> <value2> [value3_or_more]`\ncooldown (second): `5`\ncatagory: `mathematics`\naliases: `+`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "subtract" or search == "-":
-            embed=discord.Embed(title="\"subtract\" command:", description="subtracts 2 or more numbers", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]subtract <value1> <value2> [value3_or_more]`\ncooldown (second): `5`\ncatagory: `mathematics`\naliases: `-`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "multiply" or search == "*":
-            embed=discord.Embed(title="\"multiply\" command:", description="multiplies 2 numbers", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]multiply <value1> <value2>`\ncooldown (second): `5`\ncatagory: `mathematics`\naliases: `*`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "divide" or search == "/":
-            embed=discord.Embed(title="\"divide\" command:", description="divides 2 numbers", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]divide <value1> <value2>`\ncooldown (second): `5`\ncatagory: `mathematics`\naliases: `/`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "power" or search == "**":
-            embed=discord.Embed(title="\"power\" command:", description="powers 2 numbers", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]power <value1> <value2>`\ncooldown (second): `5`\ncatagory: `mathematics`\naliases: `**`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "squareroot" or search == "sqrt":
-            embed=discord.Embed(title="\"squareroot\" command:", description="squareroots 1 number", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]squareroot <value>`\ncooldown (second): `5`\ncatagory: `mathematics`\naliases: `sqrt`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "quaduatic" or search == "quad":
-            embed=discord.Embed(title="\"quaduatic\" command:", description="solve a quaduatic equation by typing its a value, b value, and c value (y=ax^2+bx+c/y=a(x-h)^2+k)", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]quaduatic <a> <b> <c>`\ncooldown (second): `5`\ncatagory: `advanced maths`\naliases: `quad`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "straightline" or search == "stline":
-            embed=discord.Embed(title="\"straightline\" command:", description="find the details from a straight line equation (y=mx+c/ax+bx+c=0)", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]straightline <a> <b> <c>`\ncooldown (second): `5`\ncatagory: `advanced maths`\naliases: `stline`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "reddit":
-            embed=discord.Embed(title="\"reddit\" command:", description="gets a subreddit post", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]reddit <subreddit_name>`\ncooldown (second): `none`\ncatagory: `misc`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "dungeon":
-            embed=discord.Embed(title="\"dungeon\" command:", description="enters a dungeon", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]dungeon`\ncooldown (second): `none`\ncatagory: `misc`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        elif search == "hunt":
-            embed=discord.Embed(title="\"hunt\" command:", description="goes for a hunt, difficulties are easy, normal, hard, and boss (secret difficulty and keys can also be accessed)", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]hunt <difficulty>`\ncooldown (second): `none`\ncatagory: `misc`\naliases: `none`', inline=False)
-            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
-            await ctx.send(embed=embed)
-            print(f"[log] {ctx.author} requested ]cmdinfo.")
-        else:
-            await ctx.reply(f"no such command ({search})")
-            print(f"[log] {ctx.author} returned an error: Bad argument.")
 
     # cmds
     @commands.command(aliases=['test'])
@@ -653,7 +515,6 @@ class MainCog(commands.Cog):
         embed64 = discord.Embed(title=f'{ctx.message.author} notified you!', description=f'Message: {message}', color=discord.Color.blue())
         await user.send(embed = embed64)
         print(f'[log] {ctx.author} \'s DM has successfully sent.')
-
         embed61 = discord.Embed(title=f':white_check_mark: I notified **{user}**', description=f'Message content: {message}', color=discord.Color.green())
         await ctx.channel.send(embed = embed61)
         print(f'[log] {ctx.author} requested ]notify, content: {ctx.message_content}.')
@@ -662,12 +523,8 @@ class MainCog(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def isSus(self, ctx, *, user: discord.User):
         sus = random.choice([True, False])
-        if bool(sus) == True:
-            await ctx.send(f'{user.mention} is very sus')
-        elif bool(sus) == False:
-            await ctx.send(f'{user.mention} isn\'t sus')
-        else:
-            await ctx.reply('undefined')
+        if bool(sus) == True: await ctx.send(f'{user.mention} is very sus')
+        elif bool(sus) == False: await ctx.send(f'{user.mention} isn\'t sus')
         print(f'[log] {ctx.author} requested ]sus.')
 
     @commands.command()
@@ -1085,7 +942,6 @@ class MainCog(commands.Cog):
             elif c == ";":
                 await ctx.send(''.join(text))
                 print(f'[log] {ctx.author} requested ]decode.')
-                quit()
             elif c == "*": text.append(" ")
             elif c == "!": value = 0
             elif c == "&": text.append(str(value))
@@ -1095,138 +951,34 @@ class MainCog(commands.Cog):
     # stroketranslate
     @commands.command(aliases=['stroktrans'])
     async def stroktranslate(self, ctx, *, strok: str):
-    # var
-        a = ["amogus ", "are ", "arcane ", "am ", "archie ", "Arch ", "arg1 ", "apt ", "afk ", "autocorrect ", "a ", "archbot ", "autocarrot "]
-        b = ["BadArgument ", "bytes ", "bot ", "but ", "beg ", "bored ", "baka ", "bye ", "bad ", "btw ", "boolean ", "bootloader ", "because ", "boot ", "balls ", "black ", "back ", "backspace ", "\\b "]
-        c = ["CommandOnCooldown ", "cum ", "cat ", "cock ", "chat ", "cyan ", "cpp ", "command ", "client ", "copy ", "copyright ", "code ", "config ", "click ", "cursed ", "cursor "]
-        d = ["daemon ", "dog ", "dumb ", "database ", "do ", "dood ", "directory ", "discord ", "distro ", "delete ", "deez nuts ", "dont "]
-        e = ["exit ", "eat ", "easy ", "error ", "eyes ", "epic ", "evaluate ", "english "]
-        f = ["fuck ", "fish ", "false ", "fucking ", "frick ", "file ", "false ", "firmware ", "find ", "fstab ", "fire ", "forkbomb ", "fucked "]
-        g = ["good ", "github ", "give ", "gcc (compiler) ", "garbage ", "game ", "GNU/Linux ", "gentoo ", "guild ", "gonna ", "gay "]
-        h = ["how ", "(r/TheLetter)H ", "hello ", "hub ", "head ", "header (file) ", "home ", "h4xx0r ", "hack ", "heck ", "hell "]
-        i = ["InvaildArgument ", "i ", "integer ", "imposter ", "image ", "is ", "idk ", "imagine ", "im ", "install ", "int ", "in ", "init.d ", "isobot ", "import ", "ImportError "]
-        j = ["json ", "java ", "javascript ", "just ", "Joe ", "join "]
-        k = ["ok ", "kwargs ", "keyword ", "karma ", "kreate (because i use kde) ", "Kde ", "Kali ", "kill ", "kernel ", "kick "]
-        l = ["lol ", "like ", "Linux ", "lag ", "lagging ", "lick ", "love "]
-        m = ["MissingPermissions ", "MissingRequiredArgument ", "me ", "my ", "more ", "mate ", "meme ", "masterhacker ", "micro$hit ", "minecraft "]
-        n = ["null ", "nuts ", "never ", "no ", "not ", "newline ", "nano (open-source garbage) ", "nexus ", "new ", "name ", "nuke ", "nitro ", "nt (kernel is bad) ", "notsniped ", "node.js ", "\\n "]
-        o = ["os ", "or ", "only ", "Operating System ", "open-source ", "omg ", "of ", "openSUSE ", "offline ", "on ", "open ", "ok "]
-        p = ["penis ", "people ", "prompt ", "python ", "purge ", "pacman ", "piracy ", "ping ", "problem ", "pog ", "poggers "]
-        q = ["quit ", "quadratic ", "quadra "]
-        r = ["reddit ", "remove ", "root ", "real ", "really ", "random ", "rip ", "rank ", "return ", "repositories ", "raise "]
-        s = ["sus ", "suspicious ", "sussy ", "say ", "sudo ", "superuser ", "script ", "stroke ", "send ", "systemd ", "snipe ", "string ", "space ", "stackoverflow ", "software ", "studio ", "suck ", "snake ", "semicolon ", "shit ", "str ", "SystemExit "]
-        t = ["true ", "tank ", "that ", "the ", "terminal ", "token ", "time ", "test ", "text "]
-        u = ["you ", "ueventd ", "your ", "youre ", "unicode ", "use ", "user ", "undefined ", "unixporn ", "Ubuntu ", "up "]
-        v = ["version ", "variable ", "very ", "void ", "visual ", "value ", "ValueError"]
-        w = ["why ", "welp ", "well ", "wget ", "what ", "wtf ", "winshit ", "wait ", "word ", "windows ", "who ", "while ", "when ", "warn "]
-        x = ["xorg ", "xbox "]
-        y = ["why ", "you ", "your ", "youre ", "yes "]
-        z = ["zip ", "zeta "]
-
-        arr = []
-        for letter in strok:
-            if letter == "a": arr.append(random.choice(a))
-            elif letter == "b": arr.append(random.choice(b))
-            elif letter == "c": arr.append(random.choice(c))
-            elif letter == "d": arr.append(random.choice(d))
-            elif letter == "e": arr.append(random.choice(e))
-            elif letter == "f": arr.append(random.choice(f))
-            elif letter == "g": arr.append(random.choice(g))
-            elif letter == "h": arr.append(random.choice(h))
-            elif letter == "i": arr.append(random.choice(i))
-            elif letter == "j": arr.append(random.choice(j))
-            elif letter == "k": arr.append(random.choice(k))
-            elif letter == "l": arr.append(random.choice(l))
-            elif letter == "m": arr.append(random.choice(m))
-            elif letter == "n": arr.append(random.choice(n))
-            elif letter == "o": arr.append(random.choice(o))
-            elif letter == "p": arr.append(random.choice(p))
-            elif letter == "q": arr.append(random.choice(q))
-            elif letter == "r": arr.append(random.choice(r))
-            elif letter == "s": arr.append(random.choice(s))
-            elif letter == "t": arr.append(random.choice(t))
-            elif letter == "u": arr.append(random.choice(u))
-            elif letter == "v": arr.append(random.choice(v))
-            elif letter == "w": arr.append(random.choice(w))
-            elif letter == "x": arr.append(random.choice(x))
-            elif letter == "y": arr.append(random.choice(y))
-            elif letter == "z": arr.append(random.choice(z))
-            elif letter == "1": arr.append("1 ")
-            elif letter == "2": arr.append("2 ")
-            elif letter == "3": arr.append("3 ")
-            elif letter == "4": arr.append("4 ")
-            elif letter == "5": arr.append("5 ")
-            elif letter == "6": arr.append("6 ")
-            elif letter == "7": arr.append("7 ")
-            elif letter == "8": arr.append("8 ")
-            elif letter == "9": arr.append("9 ")
-            elif letter == "0": arr.append("0 ")
-            elif letter == " ": arr.append("{space} ")
-            elif letter == "~": arr.append("{tilde} ")
-            elif letter == "`": arr.append("{acute} ")
-            elif letter == "!": arr.append("{exclamation_mark} ")
-            elif letter == "@": arr.append("{at} ")
-            elif letter == "#": arr.append("{sharp} ")
-            elif letter == "$": arr.append("{dollar_sign} ")
-            elif letter == "%": arr.append("{percent} ")
-            elif letter == "^": arr.append("{caret} ")
-            elif letter == "*": arr.append("{asterisk} ")
-            elif letter == "(": arr.append("{open_parenthesis} ")
-            elif letter == ")": arr.append("{close_parenthesis} ")
-            elif letter == "_": arr.append("{underscore} ")
-            elif letter == "-": arr.append("{hyphen} ")
-            elif letter == "+": arr.append("{plus_sign} ")
-            elif letter == "=": arr.append("{equal_sign} ")
-            elif letter == "{": arr.append("{open_curly_bracket} ")
-            elif letter == "}": arr.append("{close_curly_bracket} ")
-            elif letter == "[": arr.append("{open_bracket} ")
-            elif letter == "]": arr.append("{close_bracket} ")
-            elif letter == "|": arr.append("{vertical_bar} ")
-            elif letter == "\\": arr.append("{backslash} ")
-            elif letter == "/": arr.append("{slash} ")
-            elif letter == ":": arr.append("{colon} ")
-            elif letter == ";": arr.append("{semicolon} ")
-            elif letter == "\"": arr.append("{quote} ")
-            elif letter == "\'": arr.append("{apostrophe} ")
-            elif letter == "<": arr.append("{left_angle_bracket} ")
-            elif letter == ">": arr.append("{right_angle_bracket} ")
-            elif letter == ",": arr.append("{comma} ")
-            elif letter == ".": arr.append("{dot} ")
-            elif letter == "?": arr.append("{question_mark} ")
-
+        try:
+            if len(strok) > 300: return await ctx.reply("Please use no more than 300 length")
+            else:
+                with open(f"{os.getcwd()}/words.json", "r") as f: words = json.load(f)
+                var = str()
+                s = strok.lower()
+                for i, c in enumerate(s): var += random.choice(words[c])
+                return await ctx.send(f"{var}")
+        except Exception as e: return await ctx.send(f"{type(e).__name__}: {e}")
         var = ''.join(arr)
         await ctx.reply(f"{var}")
         print(f'[log] {ctx.author} requested ]stroktranslate.')
     # end of stroktranslate
     @commands.command(name="reddit")
     async def _reddit(self, ctx, sub:str):
-        nsfw = [
-            "porn",
-            "sex",
-            "nude",
-            "nudes",
-            "cock",
-            "penis",
-            "nsfw", 
-            "cum"
-        ]
-        whitelist = [
-            "unixporn"
-        ]
+        nsfw = ["porn", "sex", "nude", "cock", "penis", "nsfw",  "cum"]
+        whitelist = ["unixporn"]
 
         if any(x in sub.lower() for x in nsfw):
             if any(x in sub.lower() for x in whitelist): pass
             else: 
                 await ctx.reply("no nsfw")
                 print(f"[log] blocked an reddit command by {ctx.author}.")
-                return 
         async with ctx.typing():
             try:
                 submissions = reddit.subreddit(sub).hot()
                 post_to_pick = random.randint(1, 100)
-                for i in range(0, post_to_pick):
-                    submission = next(x for x in submissions if not x.stickied)
-
+                for i in range(0, post_to_pick): submission = next(x for x in submissions if not x.stickied)
                 embed = discord.Embed(title=submission.title)
                 embed.set_image(url=submission.url)
                 await ctx.send(embed=embed)
@@ -1238,66 +990,26 @@ class MainCog(commands.Cog):
     @commands.command()
     async def dungeon(self, ctx):
         await ctx.send("you entered the dungeon...")
-        await ctx.send("Level1: you can go forward, left, or right...\nmake your choice!")
-        L1choices = ["forward", "left", "right"]
-        L1 = random.choice(["forward", "left", "right"])
-        def check(msg): return msg.author == ctx.author and msg.channel == ctx.channel and (msg.content)
-        msg = await self.bot.wait_for("message", check=check)
-        if msg.content == L1:
-            await ctx.send(f"you go {msg.content}...")
-            async with ctx.typing():
-                await ctx.send(random.choice(["you stepped on a trap! you died while exploring the area...", "you encountered a creeper! it exploded and you died.", "you found a diamond inside a chest, however its cursed! you died by touching the cursed diamond...", "you countinued walking, suddenly you fell into the void by accident... you died."]))
-                print(f"[log] {ctx.author} requested ]dungeon.")
-                raise ValueError
-        elif msg.content not in L1choices:
-            await ctx.send(f"you tried to go {msg.content}... its not a good move so you died.")
-            print(f"[log] {ctx.author} requested ]dungeon.")
-            raise ValueError
-        else:
-            await ctx.send(f"you go {msg.content}... congrats! you survived and moved to the next Level.")
-            async with ctx.typing():
-                await ctx.send("Level2: you can go forward, backward, left, or right...\ngood luck!")
-                pass
-                
-        L2choices = ["forward", "backward", "left", "right"]
-        L2 = random.choice(["forward", "backward", "left", "right"])
-        def check(msg2): return msg2.author == ctx.author and msg2.channel == ctx.channel and (msg2.content)
-        msg2 = await self.bot.wait_for("message", check=check)
-        if msg2.content == L2:
-            await ctx.send(f"you go {msg.content}...")
-            async with ctx.typing():
-                await ctx.send(random.choice(["you came across a maze, you walked in and lost in it... forever...", "you walked into a small room, and got poisoned for no reason... you died of suffocating.", "you approached a dragon! it ate you alive... oof.", "you met a evil witch, she turned you into a black cat... i don\'t think you can escape from her..."]))
-                print(f"[log] {ctx.author} requested ]dungeon.")
-                raise ValueError
-        elif msg2.content not in L2choices:
-            await ctx.send(f"you tried to go {msg2.content}... but you got killed by a ghost before you could react.")
-            print(f"[log] {ctx.author} requested ]dungeon.")
-            raise ValueError
-        else: 
-            await ctx.send(f"you go {msg2.content}... congrats! you survived and moved to the next Level.")
-            async with ctx.typing():
-                await ctx.send("Level3: you can go forward, backward, left, right, or diagonally...\nhave fun and good luck!")
-                pass
-             
-        L3choices = ["forward", "backward", "left", "right", "diagonally"]
-        L3 = random.choice(["forward", "backward", "left", "right", "diagonally"])
-        def check(msg3): return msg3.author == ctx.author and msg3.channel == ctx.channel and (msg3.content)
-        msg3 = await self.bot.wait_for("message", check=check)
-        if msg3.content == L3:
-            await ctx.send(f"you go {msg.content}...")
-            async with ctx.typing():
-                await ctx.send(random.choice(["you encountered a ghost! you were scared and died of heart attack...", "you accidentally activated a TNT trap! you died of massive explosion...", "you accidentally activated a lava trap! you fell in and died.", "your curiosity made you pulled a suspicious lever... a deadly trap activated that milions of arrows shot at you... congrats, you died."]))
-                print(f"[log] {ctx.author} requested ]dungeon.")
-                raise ValueError
-        elif msg3.content not in L3choices:
-            await ctx.send(f"you tried to go {msg3.content}... but you got killed by some falling gravels... ouch.")
-            print(f"[log] {ctx.author} requested ]dungeon.")
-            raise ValueError
-        else: 
-            await ctx.send(f"you go {msg3.content}... congrats! you survived and moved to the next Level.")
-            async with ctx.typing():
-                await ctx.send("congrats! you successfully passed the dungeon! (more levels will be added)")
-            print(f"[log] {ctx.author} requested ]dungeon.")
+        print(f"[log] {ctx.author} requested ]dungeon.")
+        levels = 3
+        for i in range(levels): 
+            m = await ctx.send(f"Level {i}: you can go forward, left, or right...\nmake your choice!")
+            L1choices = ["forward", "left", "right"]
+            L1 = random.choice(["forward", "left", "right"])
+            def check(msg): return msg.author == ctx.author and msg.channel == ctx.channel and (msg.content)
+            msg = await self.bot.wait_for("message", check=check)
+            if msg.content == L1:
+                await m.edit(content=f"you go {msg.content}...")
+                await asyncio.sleep(1)
+                await m.edit(content=random.choice(["you stepped on a trap! you died while exploring the area...", "you encountered a creeper! it exploded and you died.", "you found a diamond inside a chest, however its cursed! you died by touching the cursed diamond...", "you countinued walking, suddenly you fell into the void by accident... you died."]))
+                break
+            elif msg.content not in L1choices:
+                await m.edit(content=f"you tried to go {msg.content}... its not a good move so you died.")
+                break
+            else:
+                await m.edit(f"you go {msg.content}... congrats! you survived and moved to the next Level.")
+            if i == 3: await ctx.send("congrats! you successfully passed the dungeon! (more levels will be added)")
+
 
     @commands.command()
     async def hunt(self, ctx, dif: str):
