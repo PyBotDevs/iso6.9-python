@@ -81,10 +81,10 @@ class MainCog(commands.Cog):
     @commands.command(aliases=['help'])
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def embed(self, ctx):
-        embed=discord.Embed(title="**help command list of iso6.9**", description="version: 17012022c\ncurrent prefix: `]`", color=discord.Color.blue())
+        embed=discord.Embed(title="**help command list of iso6.9**", description="version: 20012022a\ncurrent prefix: `]`", color=discord.Color.blue())
         embed.add_field(name='moderation:', value="kick, ban, unban, purge, mute, unmute, warn, lock, unlock", inline=False)
         embed.add_field(name='informative:', value="testcmd, ping, serverlist, morebots, serverinfo, userinfo, invites, avatar, cmdinfo", inline=False)
-        embed.add_field(name='misc:', value="snipe (channel), edit_snipe (global), 8ball, fstab, roll, say, null, sus, notify, stroke, randnum, kill, amogus, guess, duel, cup, lick, spam, encode, decode, stroktranslate, reddit", inline=False)
+        embed.add_field(name='misc:', value="snipe (channel), edit_snipe (global), 8ball, fstab, roll, say, null, sus, notify, stroke, randnum, kill, amogus, guess, duel, cup, lick, spam, encode, decode, stroktranslate, reddit, dungeon, hunt", inline=False)
         embed.add_field(name='mathematics:', value="sum, subtract, multiply, divide, power, squareroot", inline=False)
         embed.add_field(name='advanced maths:', value="quadratic, straightline", inline=False)
         embed.add_field(name='administrator:', value="> use `sudo help` to get details about admin commands.", inline=False)
@@ -98,7 +98,7 @@ class MainCog(commands.Cog):
         embed=discord.Embed(title='**alias list of iso6.9**', description='> use aliases to shorten commands', color=discord.Color.blue())
         embed.add_field(name='moderation:', value='kick, ban, unban, clear, shutup, unmute, warn, lock, unlock', inline=False)
         embed.add_field(name='informative:', value="test, ping, slist, bots, sinfo, whois, invites, av, cinfo", inline=False)
-        embed.add_field(name='misc:', value="snipe (channel), edit_snipe (global), 8ball, fstab, roll, say, null, sus, notify, stroke, randgen, kill, amogus, guess, duel, cup, lick, spam, enc, dec, stroktrans, reddit", inline=False)
+        embed.add_field(name='misc:', value="snipe (channel), edit_snipe (global), 8ball, fstab, roll, say, null, sus, notify, stroke, randgen, kill, amogus, guess, duel, cup, lick, spam, enc, dec, stroktrans, reddit, dungeon, hunt", inline=False)
         embed.add_field(name='mathematics:', value="+, -, *, /, **, sqrt", inline=False)
         embed.add_field(name='advanced maths:', value="quad, stline", inline=False)
         embed.add_field(name='administrator:', value="> use `sudo help` to get details about admin commands.", inline=False)
@@ -326,7 +326,7 @@ class MainCog(commands.Cog):
             print(f"[log] {ctx.author} requested ]cmdinfo.")
         elif search == "stroktranslate" or search == "stroktrans":
             embed=discord.Embed(title="\"stroktranslate\" command:", description="a translator that translates word strokes to another word stroke", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]stroktranslate <message>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `stroktrans`', inline=False)
+            embed.add_field(name=".", value='usage: `]stroktranslate <message>`\ncooldown (second): `none`\ncatagory: `misc`\naliases: `stroktrans`', inline=False)
             embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
             await ctx.send(embed=embed)
             print(f"[log] {ctx.author} requested ]cmdinfo.")
@@ -381,6 +381,18 @@ class MainCog(commands.Cog):
         elif search == "reddit":
             embed=discord.Embed(title="\"reddit\" command:", description="gets a subreddit post", color=discord.Color.blue())
             embed.add_field(name=".", value='usage: `]reddit <subreddit_name>`\ncooldown (second): `none`\ncatagory: `misc`\naliases: `none`', inline=False)
+            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
+            await ctx.send(embed=embed)
+            print(f"[log] {ctx.author} requested ]cmdinfo.")
+        elif search == "dungeon":
+            embed=discord.Embed(title="\"dungeon\" command:", description="enters a dungeon", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]dungeon`\ncooldown (second): `none`\ncatagory: `misc`\naliases: `none`', inline=False)
+            embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
+            await ctx.send(embed=embed)
+            print(f"[log] {ctx.author} requested ]cmdinfo.")
+        elif search == "hunt":
+            embed=discord.Embed(title="\"hunt\" command:", description="goes for a hunt, difficulties are easy, normal, hard, and boss (secret difficulty and keys can also be accessed)", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]hunt <difficulty>`\ncooldown (second): `none`\ncatagory: `misc`\naliases: `none`', inline=False)
             embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
             await ctx.send(embed=embed)
             print(f"[log] {ctx.author} requested ]cmdinfo.")
@@ -1185,7 +1197,7 @@ class MainCog(commands.Cog):
         var = ''.join(arr)
         await ctx.reply(f"{var}")
         print(f'[log] {ctx.author} requested ]stroktranslate.')
-
+    # end of stroktranslate
     @commands.command(name="reddit")
     async def _reddit(self, ctx, sub:str):
         nsfw = [
@@ -1222,6 +1234,227 @@ class MainCog(commands.Cog):
             except Exception as e:
                 await ctx.send(e)
                 print(f"[log] {ctx.author} returned an error: {e}.")
+
+    @commands.command()
+    async def dungeon(self, ctx):
+        await ctx.send("you entered the dungeon...")
+        await ctx.send("Level1: you can go forward, left, or right...\nmake your choice!")
+        L1choices = ["forward", "left", "right"]
+        L1 = random.choice(["forward", "left", "right"])
+        def check(msg): return msg.author == ctx.author and msg.channel == ctx.channel and (msg.content)
+        msg = await self.bot.wait_for("message", check=check)
+        if msg.content == L1:
+            await ctx.send(f"you go {msg.content}...")
+            async with ctx.typing():
+                await ctx.send(random.choice(["you stepped on a trap! you died while exploring the area...", "you encountered a creeper! it exploded and you died.", "you found a diamond inside a chest, however its cursed! you died by touching the cursed diamond...", "you countinued walking, suddenly you fell into the void by accident... you died."]))
+                print(f"[log] {ctx.author} requested ]dungeon.")
+                raise ValueError
+        elif msg.content not in L1choices:
+            await ctx.send(f"you tried to go {msg.content}... its not a good move so you died.")
+            print(f"[log] {ctx.author} requested ]dungeon.")
+            raise ValueError
+        else:
+            await ctx.send(f"you go {msg.content}... congrats! you survived and moved to the next Level.")
+            async with ctx.typing():
+                await ctx.send("Level2: you can go forward, backward, left, or right...\ngood luck!")
+                pass
+                
+        L2choices = ["forward", "backward", "left", "right"]
+        L2 = random.choice(["forward", "backward", "left", "right"])
+        def check(msg2): return msg2.author == ctx.author and msg2.channel == ctx.channel and (msg2.content)
+        msg2 = await self.bot.wait_for("message", check=check)
+        if msg2.content == L2:
+            await ctx.send(f"you go {msg.content}...")
+            async with ctx.typing():
+                await ctx.send(random.choice(["you came across a maze, you walked in and lost in it... forever...", "you walked into a small room, and got poisoned for no reason... you died of suffocating.", "you approached a dragon! it ate you alive... oof.", "you met a evil witch, she turned you into a black cat... i don\'t think you can escape from her..."]))
+                print(f"[log] {ctx.author} requested ]dungeon.")
+                raise ValueError
+        elif msg2.content not in L2choices:
+            await ctx.send(f"you tried to go {msg2.content}... but you got killed by a ghost before you could react.")
+            print(f"[log] {ctx.author} requested ]dungeon.")
+            raise ValueError
+        else: 
+            await ctx.send(f"you go {msg2.content}... congrats! you survived and moved to the next Level.")
+            async with ctx.typing():
+                await ctx.send("Level3: you can go forward, backward, left, right, or diagonally...\nhave fun and good luck!")
+                pass
+             
+        L3choices = ["forward", "backward", "left", "right", "diagonally"]
+        L3 = random.choice(["forward", "backward", "left", "right", "diagonally"])
+        def check(msg3): return msg3.author == ctx.author and msg3.channel == ctx.channel and (msg3.content)
+        msg3 = await self.bot.wait_for("message", check=check)
+        if msg3.content == L3:
+            await ctx.send(f"you go {msg.content}...")
+            async with ctx.typing():
+                await ctx.send(random.choice(["you encountered a ghost! you were scared and died of heart attack...", "you accidentally activated a TNT trap! you died of massive explosion...", "you accidentally activated a lava trap! you fell in and died.", "your curiosity made you pulled a suspicious lever... a deadly trap activated that milions of arrows shot at you... congrats, you died."]))
+                print(f"[log] {ctx.author} requested ]dungeon.")
+                raise ValueError
+        elif msg3.content not in L3choices:
+            await ctx.send(f"you tried to go {msg3.content}... but you got killed by some falling gravels... ouch.")
+            print(f"[log] {ctx.author} requested ]dungeon.")
+            raise ValueError
+        else: 
+            await ctx.send(f"you go {msg3.content}... congrats! you survived and moved to the next Level.")
+            async with ctx.typing():
+                await ctx.send("congrats! you successfully passed the dungeon! (more levels will be added)")
+            print(f"[log] {ctx.author} requested ]dungeon.")
+
+    @commands.command()
+    async def hunt(self, ctx, dif: str):
+        #var
+        monsterE = random.choice(["a slime", "a cow", "a fox", "a pig", "a rabbit", "a chicken"])
+        monsterN = random.choice(["a zombie", "a witch", "a skeleton", "a spider", "a creeper"])
+        monsterH = random.choice(["a dragon", "a wither", "a phoenix", "a ghast", "a phantom"])
+        boss = random.choice(["thatOneArchBot", "isobot", "an amogus", "a sussy impasta"])
+        secret = "the developers"
+        hpE = random.randint(1, 20)
+        hpN = random.randint(20, 100)
+        hpH = random.randint(110, 200)
+        hpB = random.randint(250, 500)
+        hpS = str(69694200000)
+        lost = random.randint(0, 200)
+        ultimate = random.randint(150, 550)
+        leftE = hpE - lost
+        leftN = hpN - lost
+        leftH = hpH - lost
+        leftB = hpB - lost
+        ultH = hpH - ultimate
+        ultB = hpB - ultimate
+        # end of var
+        if dif == "easy":
+            await ctx.send(f"you went hunting and found {monsterE}! hp: {hpE}\n(action: fight/escape)")
+            def check(msg): return msg.author == ctx.author and msg.channel == ctx.channel and (msg.content)
+            msg = await self.bot.wait_for("message", check=check)
+            if msg.content == "fight":
+                await ctx.send(f"you fight against it.")
+                async with ctx.typing():
+                    await ctx.send(f"you hit {lost}.")
+                    if leftE > 0:
+                        await ctx.send(f"the enemy has {leftE} hp left. you didnt kill it in one hit and {monsterE} has escaped.")
+                        print(f"[log] {ctx.author} requested ]hunt")
+                    else:
+                        await ctx.send(f"you have successfully killed it. congrats!")
+                        print(f"[log] {ctx.author} requested ]hunt")
+            elif msg.content == "escape":
+                await ctx.send("you were too afraid to hunt it down so you escaped.")
+                print(f"[log] {ctx.author} requested ]hunt")
+            else:
+                await ctx.send(f"{msg.content} is not a vaild action. [process ended: BadArgument]")
+                print(f"[log] {ctx.author} ended the process of ]hunt by BadArgument.")
+                
+        elif dif == "normal":
+            await ctx.send(f"you went hunting and found {monsterN}! hp: {hpN}\n(action: fight/escape)")
+            def check(msg2): return msg2.author == ctx.author and msg2.channel == ctx.channel and (msg2.content)
+            msg2 = await self.bot.wait_for("message", check=check)
+            if msg2.content == "fight":
+                await ctx.send(f"you fight against it.")
+                async with ctx.typing():
+                    await ctx.send(f"you hit {lost}.")
+                    if leftN > 0:
+                        await ctx.send(f"the enemy has {leftN} hp left. you didnt kill it in one hit and {monsterN} has escaped.")
+                        print(f"[log] {ctx.author} requested ]hunt")
+                    else:
+                        await ctx.send(f"you have successfully killed it. congrats!")
+                        print(f"[log] {ctx.author} requested ]hunt")
+            elif msg2.content == "escape":
+                await ctx.send("you were too afraid to hunt it down so you escaped.")
+                print(f"[log] {ctx.author} requested ]hunt")
+            else:
+                await ctx.send(f"{msg2.content} is not a vaild action. [process ended: BadArgument]")
+                print(f"[log] {ctx.author} ended the process of ]hunt by BadArgument.")
+                
+        elif dif == "hard":
+            await ctx.send(f"you went hunting and found {monsterH}! hp: {hpH}\n(action: fight/ultimate/escape)")
+            def check(msg3): return msg3.author == ctx.author and msg3.channel == ctx.channel and (msg3.content)
+            msg3 = await self.bot.wait_for("message", check=check)
+            if msg3.content == "fight":
+                await ctx.send(f"you fight against it.")
+                async with ctx.typing():
+                    await ctx.send(f"you hit {lost}.")
+                    if leftH > 0:
+                        await ctx.send(f"the enemy has {leftH} hp left. you didnt kill it in one hit and {monsterH} has escaped.")
+                        print(f"[log] {ctx.author} requested ]hunt")
+                    else:
+                        await ctx.send(f"you have successfully killed it. congrats!")
+                        print(f"[log] {ctx.author} requested ]hunt")
+            elif msg3.content == "escape":
+                await ctx.send("you were too afraid to hunt it down so you escaped.")
+                print(f"[log] {ctx.author} requested ]hunt")
+            elif msg3.content == "ultimate":
+                    await ctx.send(f"you used your ultimate! you attacked your enemy with ultimate which dealt {ultimate}")
+                    async with ctx.typing():
+                        await ctx.send(f"you hit {ultimate}.")
+                        if ultH > 0:
+                            await ctx.send(f"the enemy has {ultH} hp left. you didnt kill it in one hit and {monsterH} has escaped.")
+                            print(f"[log] {ctx.author} requested ]hunt")
+                        else:
+                            await ctx.send(f"you have successfully killed it. congrats!")
+                            print(f"[log] {ctx.author} requested ]hunt")
+            else:
+                await ctx.send(f"{msg3.content} is not a vaild action. [process ended: BadArgument]")
+                print(f"[log] {ctx.author} ended the process of ]hunt by BadArgument.")
+                
+        elif dif == "boss":
+            await ctx.send(f"you went hunting and decided to fight against {boss}! hp: {hpB}\n(action: fight/ultimate/escape)")
+            def check(msg4): return msg4.author == ctx.author and msg4.channel == ctx.channel and (msg4.content)
+            msg4 = await self.bot.wait_for("message", check=check)
+            if msg4.content == "fight":
+                await ctx.send(f"you fight against it.")
+                async with ctx.typing():
+                    await ctx.send(f"you hit {lost}.")
+                    if leftB > 0:
+                        await ctx.send(f"the enemy has {leftB} hp left. you didnt kill it in one hit and {boss} has escaped.")
+                        print(f"[log] {ctx.author} requested ]hunt")
+                    else:
+                        await ctx.send(f"you have successfully killed it. congrats!")
+                        print(f"[log] {ctx.author} requested ]hunt")
+            elif msg4.content == "escape":
+                await ctx.send("you were too afraid to hunt it down so you escaped.")
+                print(f"[log] {ctx.author} requested ]hunt")
+            elif msg4.content == "ultimate":
+                    await ctx.send(f"you used your ultimate! you attacked your enemy with ultimate which dealt {ultimate}")
+                    async with ctx.typing():
+                        await ctx.send(f"you hit {ultimate}.")
+                        if ultB > 0:
+                            await ctx.send(f"the enemy has {ultB} hp left. you didnt kill it in one hit and {boss} has escaped.")
+                            print(f"[log] {ctx.author} requested ]hunt")
+                        else:
+                            await ctx.send(f"you have successfully killed it. congrats!")
+                            print(f"[log] {ctx.author} requested ]hunt")
+            else:
+                await ctx.send(f"{msg4.content} is not a vaild action. [process ended: BadArgument]")
+                print(f"[log] {ctx.author} ended the process of ]hunt by BadArgument.")
+            
+        elif dif == "codef":
+            await ctx.send(f"you went hunting... you were searching for your prey but you found {secret} instead! hp: {hpS}\n(action: fight/ultimate/escape)")
+            def check(msg5): return msg5.author == ctx.author and msg5.channel == ctx.channel and (msg5.content)
+            msg5 = await self.bot.wait_for("message", check=check)
+            if msg5.content == "fight":
+                await ctx.send(f"you fight against them.")
+                async with ctx.typing():
+                    await ctx.send(f"you hit null. looks like you cant deal any damage to {secret}")
+                    def check(msg6): return msg6.author == ctx.author and msg6.channel == ctx.channel and (msg6.content)
+                    msg6 = await self.bot.wait_for("message", check=check)
+                    if msg6.content == "705462972415213588":
+                        await ctx.send(f"looks like you have found the secret key, lol. but it does nothing...")
+                        print(f"[log] {ctx.author} requested ]hunt <codef>.")
+                    elif msg6.content == "706697300872921088":
+                        await ctx.send(f"looks like you have found the- no its not, better luck next time!")
+                        print(f"[log] {ctx.author} requested ]hunt <codef>.")
+                    else:
+                        await ctx.send(f"... nope, youre stuck in this secret level. lol")
+                        print(f"[log] {ctx.author} requested ]hunt <codef>.")
+            elif msg5.content == "escape":
+                await ctx.send("you didnt want to fight the developers so you escaped.")
+                print(f"[log] {ctx.author} requested ]hunt <codef>.")
+            elif msg5.content == "ultimate":
+                    await ctx.send(f"you used your ultimate! you attacked {secret} with ultimate which dealt null damage.")
+                    async with ctx.typing():
+                        await ctx.send(f"you cant hurt the developers! how dare you trying to kill them... :(")
+                        print(f"[log] {ctx.author} requested ]hunt <codef>.")
+            else:
+                await ctx.send(f"{msg.content} is not a vaild action. [process ended: BadArgument]")
+                print(f"[log] {ctx.author} ended the process of ]hunt by BadArgument.")
 
 def setup(bot):
     bot.add_cog(ErrorHandler(bot))
