@@ -83,25 +83,6 @@ async def on_message(message):
         else:
             await message.reply(f'hOW AboUt nO :eyes:')
             print(f'[log] {message.author} returned an error: User not admin.')
-    # auto response
-    if message.content.startswith("ayo") and not message.author.bot:
-        await message.reply("ayo")
-        print(f"[interact] {bot.user} reacted.")
-    if message.content.startswith("👀") and not message.author.bot:
-        await message.reply(":eues: :eyes:")
-        print(f"[interact] {bot.user} reacted.")
-    if message.content.startswith("wtf") and not message.author.bot:
-        await message.reply("what the actual fuck?")
-        print(f"[interact] {bot.user} reacted.")
-    if message.content.startswith("hmm") and not message.author.bot:
-        await message.reply("hmmmmmmmm :thinking:")
-        print(f"[interact] {bot.user} reacted.")
-    if message.content.startswith("strok") or message.content.startswith("strole") or message.content.startswith("strokw") and not message.author.bot:
-        await message.reply("imagine having a stroke, lol eyieyulgkbnkdhd")
-        print(f"[interact] {bot.user} reacted.")
-    if message.content.startswith("iso") and not message.author.bot:
-        await message.reply("who summoned me :face_with_raised_eyebrow:")
-        print(f"[interact] {bot.user} reacted.")
         
 # snipe
 snipe_message_author = {}
