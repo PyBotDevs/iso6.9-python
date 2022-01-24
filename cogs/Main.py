@@ -81,7 +81,7 @@ class MainCog(commands.Cog):
         self.bot = bot
 
     @commands.command(aliases=['help'])
-    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.cooldown(1, 1, commands.BucketType.user)
     async def embed(self, ctx, search=None):
         if search == None:
             embed=discord.Embed(title="**help command list of iso6.9**", description="version: 20012022a\ncurrent prefix: `]`", color=discord.Color.blue())
@@ -249,7 +249,7 @@ class MainCog(commands.Cog):
         print(f"[log] {ctx.author} requested ]print.")
 
     @commands.command(aliases=['ahelp'])
-    @commands.cooldown(1, 5, commands.BucketType.user)
+    @commands.cooldown(1, 1, commands.BucketType.user)
     async def embed77(self, ctx):
         embed=discord.Embed(title='**alias list of iso6.9**', description='> use aliases to shorten commands', color=discord.Color.blue())
         embed.add_field(name='moderation:', value='kick, ban, unban, clear, shutup, unmute, warn, lock, unlock', inline=False)
