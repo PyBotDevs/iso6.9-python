@@ -1034,7 +1034,7 @@ class MainCog(commands.Cog):
                 async with ctx.typing():
                     await ctx.send(f"you hit {lost}.")
                     if leftE > 0:
-                        await ctx.send(f"the enemy has {leftE} hp left. you didnt kill it in one hit and {monsterE} has escaped.")
+                        await ctx.send(f"the enemy has {leftE} hp left. you didnt kill it in one hit and it has escaped.")
                         print(f"[log] {ctx.author} requested ]hunt")
                     else:
                         await ctx.send(f"you have successfully killed it. congrats!")
@@ -1055,7 +1055,7 @@ class MainCog(commands.Cog):
                 async with ctx.typing():
                     await ctx.send(f"you hit {lost}.")
                     if leftN > 0:
-                        await ctx.send(f"the enemy has {leftN} hp left. you didnt kill it in one hit and {monsterN} has escaped.")
+                        await ctx.send(f"the enemy has {leftN} hp left. you didnt kill it in one hit and it has escaped.")
                         print(f"[log] {ctx.author} requested ]hunt")
                     else:
                         await ctx.send(f"you have successfully killed it. congrats!")
@@ -1076,7 +1076,7 @@ class MainCog(commands.Cog):
                 async with ctx.typing():
                     await ctx.send(f"you hit {lost}.")
                     if leftH > 0:
-                        await ctx.send(f"the enemy has {leftH} hp left. you didnt kill it in one hit and {monsterH} has escaped.")
+                        await ctx.send(f"the enemy has {leftH} hp left. you didnt kill it in one hit and it has escaped.")
                         print(f"[log] {ctx.author} requested ]hunt")
                     else:
                         await ctx.send(f"you have successfully killed it. congrats!")
@@ -1089,7 +1089,7 @@ class MainCog(commands.Cog):
                     async with ctx.typing():
                         await ctx.send(f"you hit {ultimate}.")
                         if ultH > 0:
-                            await ctx.send(f"the enemy has {ultH} hp left. you didnt kill it in one hit and {monsterH} has escaped.")
+                            await ctx.send(f"the enemy has {ultH} hp left. you didnt kill it in one hit and it has escaped.")
                             print(f"[log] {ctx.author} requested ]hunt")
                         else:
                             await ctx.send(f"you have successfully killed it. congrats!")
@@ -1107,7 +1107,7 @@ class MainCog(commands.Cog):
                 async with ctx.typing():
                     await ctx.send(f"you hit {lost}.")
                     if leftB > 0:
-                        await ctx.send(f"the enemy has {leftB} hp left. you didnt kill it in one hit and {boss} has escaped.")
+                        await ctx.send(f"the enemy has {leftB} hp left. you didnt kill it in one hit and it has escaped.")
                         print(f"[log] {ctx.author} requested ]hunt")
                     else:
                         await ctx.send(f"you have successfully killed it. congrats!")
@@ -1120,7 +1120,7 @@ class MainCog(commands.Cog):
                     async with ctx.typing():
                         await ctx.send(f"you hit {ultimate}.")
                         if ultB > 0:
-                            await ctx.send(f"the enemy has {ultB} hp left. you didnt kill it in one hit and {boss} has escaped.")
+                            await ctx.send(f"the enemy has {ultB} hp left. you didnt kill it in one hit and it has escaped.")
                             print(f"[log] {ctx.author} requested ]hunt")
                         else:
                             await ctx.send(f"you have successfully killed it. congrats!")
