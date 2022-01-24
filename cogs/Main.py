@@ -20,8 +20,8 @@ from discord.ext.commands import *
 
 owner = ["αrchιshα#5518", "notsniped#4573", "thatOneArchUser#5794"]
 oid = [706697300872921088, 738290097170153472, 705462972415213588]
-reddit = praw.Reddit(client_id='_pazwWZHi9JldA',
-                     client_secret='1tq1HM7UMEGIro6LlwtlmQYJ1jB4vQ',
+reddit = praw.Reddit(client_id='reddit_client_id',
+                     client_secret='reddit_client_secret',
                      user_agent='idk', check_for_async=False)
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
@@ -103,25 +103,25 @@ class MainCog(commands.Cog):
             embed.add_field(name=".", value='usage: `]help`\ncooldown (second): `none`\ncatagory: `none`\naliases: `none`', inline=False)
         elif search == "kick":
             embed=discord.Embed(title="\"kick\" command:", description="kicks a user out the ~~Linux~~ server", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]kick <mention_user>/<user_id>/<user_name> [reason]`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
+            embed.add_field(name=".", value='usage: `]kick <mention_user>/<user_id>/<user_name> [reason]`\ncooldown (second): `none`\ncatagory: `moderation`\naliases: `none`', inline=False)
         elif search == "ban":
             embed=discord.Embed(title="\"ban\" command:", description="uses ban hammer on a user", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]ban <mention_user>/<user_id>/<user_name> [reason]`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
+            embed.add_field(name=".", value='usage: `]ban <mention_user>/<user_id>/<user_name> [reason]`\ncooldown (second): `none`\ncatagory: `moderation`\naliases: `none`', inline=False)
         elif search == "unban":
             embed=discord.Embed(title="\"unban\" command:", description="unbans a user from banned list ~~of not using Arch Linux~~", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]unban <mention_user>/<user_id>/<user_name>`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
+            embed.add_field(name=".", value='usage: `]unban <mention_user>/<user_id>/<user_name>`\ncooldown (second): `none`\ncatagory: `moderation`\naliases: `none`', inline=False)
         elif search == "purge" or search == "clear":
             embed=discord.Embed(title="\"purge\" command:", description="clears an amount of messages in the channel", color=discord.Color.blue())
             embed.add_field(name=".", value='usage: `]purge <amount(int)>`\ncooldown (second): `3`\ncatagory: `moderation`\naliases: `clear`', inline=False)
         elif search == "mute" or search == "shutup":
             embed=discord.Embed(title="\"mute\" command:", description="mutes a user so that they can shut up", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]mute <mention_user>/<user_id>/<user_name> [reason]`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `shutup`', inline=False)
+            embed.add_field(name=".", value='usage: `]mute <mention_user>/<user_id>/<user_name> [reason]`\ncooldown (second): `none`\ncatagory: `moderation`\naliases: `shutup`', inline=False)
         elif search == "unmute":
             embed=discord.Embed(title="\"unmute\" command:", description="unmutes a user so they can be free to talk again", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]unmute <mention_user>/<user_id>/<user_name>`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
+            embed.add_field(name=".", value='usage: `]unmute <mention_user>/<user_id>/<user_name>`\ncooldown (second): `none`\ncatagory: `moderation`\naliases: `none`', inline=False)
         elif search == "warn":
             embed=discord.Embed(title="\"warn\" command:", description="warns the user if they did something wrong", color=discord.Color.blue())
-            embed.add_field(name=".", value='usage: `]warn <mention_user>/<user_id>/<user_name> [reason]`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
+            embed.add_field(name=".", value='usage: `]warn <mention_user>/<user_id>/<user_name> [reason]`\ncooldown (second): `none`\ncatagory: `moderation`\naliases: `none`', inline=False)
         elif search == "lock":
             embed=discord.Embed(title="\"lock\" command:", description="locks specific channel so people are unable to talk in it", color=discord.Color.blue())
             embed.add_field(name=".", value='usage: `]lock <mention_channel>/<channel_id>/<channel_name>`\ncooldown (second): `10`\ncatagory: `moderation`\naliases: `none`', inline=False)
@@ -245,7 +245,7 @@ class MainCog(commands.Cog):
             return
         embed.set_footer(text='*<> is required, [] is optional.\nnone means None.*')
         await ctx.send(embed=embed)
-        #print(f"[log] {ctx.author} requested ]cmdinfo.")
+        # print(f"[log] {ctx.author} requested ]cmdinfo.")
         print(f"[log] {ctx.author} requested ]print.")
 
     @commands.command(aliases=['ahelp'])
@@ -380,7 +380,7 @@ class MainCog(commands.Cog):
         print(f'[log] {ctx.author} requested ]null.')
 
     @commands.command()
-    @commands.cooldown(1, 10, commands.BucketType.user)
+    @commands.cooldown(1, 1, commands.BucketType.user)
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason=None):
         await member.kick(reason=reason)
@@ -400,7 +400,7 @@ class MainCog(commands.Cog):
         await ctx.send(embed = em)
 
     @commands.command(aliases=['shutup'])
-    @commands.cooldown(1, 10, commands.BucketType.user)
+    @commands.cooldown(1, 1, commands.BucketType.user)
     @commands.has_permissions(manage_messages=True)
     async def mute(self, ctx, member: discord.Member, *, reason=None):
         guild = ctx.guild
@@ -417,7 +417,7 @@ class MainCog(commands.Cog):
         print(f'[log] {ctx.author} \'s DM has successfully sent.')
 
     @commands.command()
-    @commands.cooldown(1, 10, commands.BucketType.user)
+    @commands.cooldown(1, 1, commands.BucketType.user)
     @commands.has_permissions(manage_messages=True)
     async def unmute(self, ctx, member: discord.Member):
        mutedRole = discord.utils.get(ctx.guild.roles, name="Muted")
@@ -429,7 +429,7 @@ class MainCog(commands.Cog):
        print(f'[log] {ctx.author} requested ]unmute.')
 
     @commands.command()
-    @commands.cooldown(1, 10, commands.BucketType.user)
+    @commands.cooldown(1, 1, commands.BucketType.user)
     @commands.has_permissions(ban_members = True)
     async def ban(self, ctx, member : discord.Member, *, reason = None):
         await member.ban(reason = reason)
@@ -438,7 +438,7 @@ class MainCog(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
-    @commands.cooldown(1, 10, commands.BucketType.user)
+    @commands.cooldown(1, 1, commands.BucketType.user)
     async def unban(self, ctx, id: int):
         user = await self.bot.fetch_user(id)
         await ctx.guild.unban(user)
@@ -485,7 +485,7 @@ class MainCog(commands.Cog):
         print(f'[log] {ctx.author} requested ]userinfo.')
 
     @commands.command()
-    @commands.cooldown(1, 10, commands.BucketType.user)
+    @commands.cooldown(1, 1, commands.BucketType.user)
     @commands.has_permissions(manage_messages=True)
     async def warn(self, ctx, user:discord.User = None, *, warn_reason=None):
         if user == None:
@@ -785,15 +785,6 @@ class MainCog(commands.Cog):
             await ctx.send(embed = embed182)
             print(f'[log] {ctx.author} requested ]avatar.')
 
-    @commands.command()
-    @commands.cooldown(1, 10, commands.BucketType.user)
-    async def spam(self, ctx, message: str):
-        times = random.randint(0, 10)
-        while times < 11:
-            times = times + 1
-            await ctx.send(message)
-        print(f'[log] {ctx.author} requested ]spam.')
-
     # archiescript
     # encode
     @commands.command(aliases=['enc'])
@@ -964,6 +955,7 @@ class MainCog(commands.Cog):
         await ctx.reply(f"{var}")
         print(f'[log] {ctx.author} requested ]stroktranslate.')
     # end of stroktranslate
+
     @commands.command(name="reddit")
     async def _reddit(self, ctx, sub:str):
         nsfw = ["porn", "sex", "nude", "cock", "penis", "nsfw",  "cum"]
@@ -1013,7 +1005,7 @@ class MainCog(commands.Cog):
 
     @commands.command()
     async def hunt(self, ctx, dif: str):
-        #var
+        # var
         monsterE = random.choice(["a slime", "a cow", "a fox", "a pig", "a rabbit", "a chicken"])
         monsterN = random.choice(["a zombie", "a witch", "a skeleton", "a spider", "a creeper"])
         monsterH = random.choice(["a dragon", "a wither", "a phoenix", "a ghast", "a phantom"])
