@@ -23,7 +23,7 @@ In order to use reddit commands, put your Reddit client id and client secret in:
 # Commands (for all versions in this repo)
 - Use `]help` to get command list, use `]ahelp` to get alias list.
 
-- Use `]cinfo` to get help on a specific command.
+- Use `]help <command>` to get help on a specific command.
 
 - Admin commands are included (use `sudo help` to see detailed command list)
 
