@@ -1,8 +1,9 @@
 # modules
 # lines 1461 -> 1173
 # 1173 -> 1166
-import os
 import random
+import json
+import os
 import discord
 import asyncio
 import datetime
@@ -12,6 +13,7 @@ import math
 import string
 import praw
 import prawcore
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from datetime import datetime
 from random import randint
 from discord.errors import InvalidArgument
@@ -21,8 +23,8 @@ from discord.ext.commands import *
 
 owner = ["αrchιshα#5518", "notsniped#4573", "thatOneArchUser#5794"]
 oid = [706697300872921088, 738290097170153472, 705462972415213588]
-reddit = praw.Reddit(client_id='reddit_client_id',
-                     client_secret='reddit_client_secret',
+reddit = praw.Reddit(client_id='_pazwWZHi9JldA',
+                     client_secret='1tq1HM7UMEGIro6LlwtlmQYJ1jB4vQ',
                      user_agent='idk', check_for_async=False)
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
@@ -85,10 +87,10 @@ class MainCog(commands.Cog):
     @commands.cooldown(1, 1, commands.BucketType.user)
     async def embed(self, ctx, search=None):
         if search == None:
-            embed=discord.Embed(title="**help command list of iso6.9**", description="version: 20012022a\ncurrent prefix: `]`", color=discord.Color.blue())
+            embed=discord.Embed(title="**help command list of iso6.9**", description="version: 25012022a\ncurrent prefix: `]`", color=discord.Color.blue())
             embed.add_field(name='moderation:', value="kick, ban, unban, purge, mute, unmute, warn, lock, unlock", inline=False)
             embed.add_field(name='informative:', value="testcmd, ping, serverlist, morebots, serverinfo, userinfo, invites, avatar, cmdinfo", inline=False)
-            embed.add_field(name='misc:', value="snipe (channel), edit_snipe (global), 8ball, fstab, roll, say, null, sus, notify, stroke, randnum, kill, amogus, guess, duel, cup, lick, spam, encode, decode, stroktranslate, reddit, dungeon, hunt", inline=False)
+            embed.add_field(name='misc:', value="snipe (channel), edit_snipe (global), 8ball, fstab, roll, say, null, sus, notify, stroke, randnum, kill, amogus, guess, duel, cup, lick, spam, encode, decode, stroktranslate, reddit, dungeon, hunt, snap, timer", inline=False)
             embed.add_field(name='mathematics:', value="sum, subtract, multiply, divide, power, squareroot", inline=False)
             embed.add_field(name='advanced maths:', value="quadratic, straightline", inline=False)
             embed.add_field(name='administrator:', value="> use `sudo help` to get details about admin commands.", inline=False)
@@ -99,6 +101,12 @@ class MainCog(commands.Cog):
         # if search == "cmdinfo" or search == "cinfo":
         #     embed=discord.Embed(title="\"cmdinfo\" command:", description="did you expected me to write something interesting here", color=discord.Color.blue())
         #     embed.add_field(name=".", value='usage: `]cmdinfo <command_name_or_aliases>`\ncooldown (second): `none`\ncatagory: `informative`\naliases: `cinfo`', inline=False)
+        elif search == "timer":
+            embed=discord.Embed(title="\"timer\" command:", description="creates a timer, maximum: 300 seconds", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]timer <seconds>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
+        elif search == "snap":
+            embed=discord.Embed(title="\"snap\" command:", description="creates a fake screenshot of someone sending a message", color=discord.Color.blue())
+            embed.add_field(name=".", value='usage: `]snap <mention_user> <message>`\ncooldown (second): `5`\ncatagory: `misc`\naliases: `none`', inline=False)
         elif search == "help":
             embed=discord.Embed(title="\"help\" command:", description="why do you even need help on help command", color=discord.Color.blue())
             embed.add_field(name=".", value='usage: `]help`\ncooldown (second): `none`\ncatagory: `none`\naliases: `none`', inline=False)
@@ -255,7 +263,7 @@ class MainCog(commands.Cog):
         embed=discord.Embed(title='**alias list of iso6.9**', description='> use aliases to shorten commands', color=discord.Color.blue())
         embed.add_field(name='moderation:', value='kick, ban, unban, clear, shutup, unmute, warn, lock, unlock', inline=False)
         embed.add_field(name='informative:', value="test, ping, slist, bots, sinfo, whois, invites, av, cinfo", inline=False)
-        embed.add_field(name='misc:', value="snipe (channel), edit_snipe (global), 8ball, fstab, roll, say, null, sus, notify, stroke, randgen, kill, amogus, guess, duel, cup, lick, spam, enc, dec, stroktrans, reddit, dungeon, hunt", inline=False)
+        embed.add_field(name='misc:', value="snipe (channel), edit_snipe (global), 8ball, fstab, roll, say, null, sus, notify, stroke, randgen, kill, amogus, guess, duel, cup, lick, spam, enc, dec, stroktrans, reddit, dungeon, hunt, snap, timer", inline=False)
         embed.add_field(name='mathematics:', value="+, -, *, /, **, sqrt", inline=False)
         embed.add_field(name='advanced maths:', value="quad, stline", inline=False)
         embed.add_field(name='administrator:', value="> use `sudo help` to get details about admin commands.", inline=False)
@@ -1160,6 +1168,113 @@ class MainCog(commands.Cog):
             else:
                 await ctx.send(f"{msg.content} is not a vaild action. [process ended: BadArgument]")
                 print(f"[log] {ctx.author} ended the process of ]hunt by BadArgument.")
+                
+    @commands.command()
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def timer(self, ctx, seconds: int):
+        try:
+            if seconds > 300:
+                await ctx.send("I can't count up to 5 minutes")
+                print(f"[log] {ctx.author} returned an error: Timer limit reached.")
+
+            elif seconds <= 0:
+                await ctx.send("I can't count negatives")
+                print(f"[log] {ctx.author} returned an error: Bad Argument.")
+
+            else:
+                 message = await ctx.send(f"Timer: {seconds}")
+                 while True:
+                    seconds -= 1
+                    await message.edit(content=f"Timer: {seconds}")
+                    if seconds == 0:
+                        await message.edit(content="This timer has ended!")
+                        print(f"[log] {ctx.author} requested ]timer.")
+                        break
+
+        except ValueError:
+            await ctx.send("You must enter a number!")
+            print(f"[log] {ctx.author} returned an error: Invaild Argument.")
+
+    # snap
+    """
+    download the whitneymedium font from this link: https://www.cufonfonts.com/download/font-single/68522/whitney-2
+    """
+    @commands.command()
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def snap(self, ctx, member: discord.Member, *, message):
+        colour = {
+            "time": (114, 118, 125),
+            "content": (220, 221, 222)
+        }
+
+        size = {
+            "title": 20,
+            "time": 13
+        }
+
+        font = 'whitneymedium.otf'
+
+        if not member:
+            member = ctx.author
+
+        img = Image.new('RGB', (500, 115), color = (54,57,63))
+        titlefnt = ImageFont.truetype(font, size["title"])
+        timefnt = ImageFont.truetype(font, size["time"])
+        d = ImageDraw.Draw(img)
+        if member.nick is None:
+            txt = member.name
+        else:
+            txt = member.nick
+        color = member.color.to_rgb()
+        if color == (0, 0, 0):
+            color = (255,255,255)
+        d.text((90, 20), txt, font=titlefnt, fill=color)
+        h, w = d.textsize(txt, font=titlefnt)
+        time = datetime.utcnow().strftime("Today at %I:%M %p")
+        d.text((90+h+10, 25), time, font=timefnt, fill=colour["time"])
+        d.text((90, 25+w), message, font=titlefnt, fill=colour["content"])
+
+        img.save('img.png')
+        if member.is_avatar_animated():
+            await member.avatar_url_as().save("pfp.gif")
+            f2 = Image.open("pfp.gif")
+        else:
+            await member.avatar_url_as().save("pfp.png")
+            f2 = Image.open("pfp.png")
+        f1 = Image.open("img.png")
+        f2.thumbnail((50, 55))
+        f2.save("pfp.png")
+
+        f2 = Image.open("pfp.png").convert("RGB")
+
+        mask = Image.new("L", f2.size, 0)
+        draw = ImageDraw.Draw(mask)
+        draw.ellipse((0, 0, f2.size[0], f2.size[1]), fill=255)
+        mask = mask.filter(ImageFilter.GaussianBlur(0))
+
+        result = f2.copy()
+        result.putalpha(mask)
+
+        result.save('pfp.png')
+
+        f2 = Image.open("pfp.png")
+
+        f3 = f1.copy()
+        f3.paste(f2, (20, 20), f2)
+        f3.save("img.png")
+
+        file = discord.File("img.png")
+        await ctx.send(file=file)
+
+        try:
+            os.remove("pfp.gif")
+            os.remove("pfp.png")
+            os.remove("img.png")
+            await ctx.message.delete()
+            print(f"[log] {ctx.author} requested ]snap.")
+        except:
+            pass
+    # end of snap
 
 def setup(bot):
     bot.add_cog(ErrorHandler(bot))
