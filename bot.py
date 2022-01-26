@@ -1,17 +1,9 @@
 # modules
 import os
-import random
 import discord
 import asyncio
 import datetime
 import time
-import cmath
-import math
-import string
-import praw
-import prawcore
-from datetime import datetime
-from random import randint
 from discord.errors import InvalidArgument
 from discord.ext import commands
 from discord.ext.commands import *
@@ -83,6 +75,20 @@ async def on_message(message):
         else:
             await message.reply(f'hOW AboUt nO :eyes:')
             print(f'[log] {message.author} returned an error: User not admin.')
+    # swear filter
+    # var
+    bad = ["fuck", "bitch", "nigga", "nigger", "shit", "motherfucker", "cunt", "dickhead"]
+    nsfw = ["sex", "cock", "dick", "penis", "pussy"]
+    for word in bad:
+        if word in message.content and not message.author.bot:
+            await message.reply("ayo no bad words!")
+            await message.delete()
+            print(f"[filter] {bot.user} blocked a message by {message.author} which contains bad words.")
+    for word in nsfw:
+        if word in message.content and not message.author.bot:
+            await message.reply("nO nsfW")
+            await message.delete()
+            print(f"[filter] {bot.user} blocked a message by {message.author} which contains nsfw words.")
         
 # snipe
 snipe_message_author = {}
