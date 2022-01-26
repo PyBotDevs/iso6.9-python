@@ -89,7 +89,7 @@ class MainCog(commands.Cog):
         if search == None:
             embed=discord.Embed(title="**help command list of iso6.9**", description="version: 25012022a\ncurrent prefix: `]`", color=discord.Color.blue())
             embed.add_field(name='moderation:', value="kick, ban, unban, purge, mute, unmute, warn, lock, unlock", inline=False)
-            embed.add_field(name='informative:', value="testcmd, ping, serverlist, morebots, serverinfo, userinfo, invites, avatar, cmdinfo", inline=False)
+            embed.add_field(name='informative:', value="testcmd, ping, serverlist, morebots, serverinfo, userinfo, invites, avatar", inline=False)
             embed.add_field(name='misc:', value="snipe (channel), edit_snipe (global), 8ball, fstab, roll, say, null, sus, notify, stroke, randnum, kill, amogus, guess, duel, cup, lick, spam, encode, decode, stroktranslate, reddit, dungeon, hunt, snap, timer", inline=False)
             embed.add_field(name='mathematics:', value="sum, subtract, multiply, divide, power, squareroot", inline=False)
             embed.add_field(name='advanced maths:', value="quadratic, straightline", inline=False)
@@ -262,7 +262,7 @@ class MainCog(commands.Cog):
     async def embed77(self, ctx):
         embed=discord.Embed(title='**alias list of iso6.9**', description='> use aliases to shorten commands', color=discord.Color.blue())
         embed.add_field(name='moderation:', value='kick, ban, unban, clear, shutup, unmute, warn, lock, unlock', inline=False)
-        embed.add_field(name='informative:', value="test, ping, slist, bots, sinfo, whois, invites, av, cinfo", inline=False)
+        embed.add_field(name='informative:', value="test, ping, slist, bots, sinfo, whois, invites, av", inline=False)
         embed.add_field(name='misc:', value="snipe (channel), edit_snipe (global), 8ball, fstab, roll, say, null, sus, notify, stroke, randgen, kill, amogus, guess, duel, cup, lick, spam, enc, dec, stroktrans, reddit, dungeon, hunt, snap, timer", inline=False)
         embed.add_field(name='mathematics:', value="+, -, *, /, **, sqrt", inline=False)
         embed.add_field(name='advanced maths:', value="quad, stline", inline=False)
