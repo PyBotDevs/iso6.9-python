@@ -78,7 +78,7 @@ async def on_message(message):
     # swear filter
     # var
     bad = ["fuck", "bitch", "nigga", "nigger", "shit", "motherfucker", "cunt", "dickhead"]
-    nsfw = ["sex", "cock", "dick", "penis", "pussy"]
+    nsfw = ["sex", "dick", "penis", "pussy"]
     for word in bad:
         if word in message.content and not message.author.bot:
             await message.reply("ayo no bad words!")
