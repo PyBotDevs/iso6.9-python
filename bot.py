@@ -136,17 +136,13 @@ async def edit_snipe(ctx):
 
 @bot.command()
 async def load(ctx, *, arg1):
-    if ctx.message.author.id in oid:
-        pass
-    else:
+    if ctx.message.author.id not in oid:
         await ctx.reply(f"You can\'t use this command")
-        print(f"[Cog] {ctx.author} returned an error: User Missing Permission.")
-        return
+        return print(f"[Cog] {ctx.author} returned an error: User Missing Permission.")
     try:
         bot.load_extension(f'cogs.{arg1}')
         await ctx.send("Loaded Cog")
         print(f"[Cog] {ctx.author} loaded cog.")
-        return
     except Exception as e:
         await ctx.send(e)
         print(f"[Cog] An unexpected error has occurred: {e}")
