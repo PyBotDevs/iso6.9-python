@@ -1,9 +1,5 @@
 # modules
-import os
-import discord
-import asyncio
-import datetime
-import time
+import os, discord, asyncio, datetime, time
 from discord.errors import InvalidArgument
 from discord.ext import commands
 from discord.ext.commands import *
