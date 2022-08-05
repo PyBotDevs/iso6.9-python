@@ -15,16 +15,12 @@ bot.remove_command('help')
 # when ready
 @bot.event
 async def on_ready():
-    if os.name == 'nt':
-        os.system('cls')
-    else:
-        os.system('clear')
+    if os.name == 'nt': os.system('cls')
+    else: os.system('clear')
     print(f'\n> {bot.user} HAS CONNECTED TO DISCORD.\n\n> OWNER:\n')
-    for i in owner:
-        print(f"{i}\n")
+    for i in owner: print(f"{i}\n")
     print("OWNER\'S ID:\n")
-    for s in oid:
-        print(f"{s}\n")
+    for s in oid: print(f"{s}\n")
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"everyone in {str(len(bot.guilds))} guilds | ]help"))
     print(f'[log] Log is loading...')
     print(f'[log] {bot.user} changed its activity.')
