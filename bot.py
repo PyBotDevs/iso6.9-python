@@ -73,12 +73,12 @@ async def on_message(message):
     nsfw = ["sex", "dick", "penis", "pussy"]
     for word in bad:
         if word in message.content and not message.author.bot:
-            await message.reply("ayo no bad words!")
+            await message.send("ayo no bad words!")
             await message.delete()
             print(f"[filter] {bot.user} blocked a message by {message.author} which contains bad words.")
     for word in nsfw:
         if word in message.content and not message.author.bot:
-            await message.reply("nO nsfW")
+            await message.send("nO nsfW")
             await message.delete()
             print(f"[filter] {bot.user} blocked a message by {message.author} which contains nsfw words.")
         
