@@ -56,7 +56,7 @@ Official iso.bot/iso6.9 server for support:
 Partners (thank you for helping on early development!): 
 
 - Git: thatOneArchUser
-- Discord: thatOneArchUser#5794
+- Discord: thatOneArchUser#0300
 
 - Git: notsniped
 - Discord: notsniped#4573
