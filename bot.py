@@ -1,9 +1,5 @@
 # modules
-import os
-import discord
-import asyncio
-import datetime
-import time
+import os, discord, asyncio, datetime, time
 from discord.errors import InvalidArgument
 from discord.ext import commands
 from discord.ext.commands import *
@@ -19,16 +15,12 @@ bot.remove_command('help')
 # when ready
 @bot.event
 async def on_ready():
-    if os.name == 'nt':
-        os.system('cls')
-    else:
-        os.system('clear')
+    if os.name == 'nt': os.system('cls')
+    else: os.system('clear')
     print(f'\n> {bot.user} HAS CONNECTED TO DISCORD.\n\n> OWNER:\n')
-    for i in owner:
-        print(f"{i}\n")
+    for i in owner: print(f"{i}\n")
     print("OWNER\'S ID:\n")
-    for s in oid:
-        print(f"{s}\n")
+    for s in oid: print(f"{s}\n")
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"everyone in {str(len(bot.guilds))} guilds | ]help"))
     print(f'[log] Log is loading...')
     print(f'[log] {bot.user} changed its activity.')
@@ -81,12 +73,12 @@ async def on_message(message):
     nsfw = ["sex", "dick", "penis", "pussy"]
     for word in bad:
         if word in message.content and not message.author.bot:
-            await message.reply("ayo no bad words!")
+            await message.send("ayo no bad words!")
             await message.delete()
             print(f"[filter] {bot.user} blocked a message by {message.author} which contains bad words.")
     for word in nsfw:
         if word in message.content and not message.author.bot:
-            await message.reply("nO nsfW")
+            await message.send("nO nsfW")
             await message.delete()
             print(f"[filter] {bot.user} blocked a message by {message.author} which contains nsfw words.")
         
@@ -144,52 +136,40 @@ async def edit_snipe(ctx):
 
 @bot.command()
 async def load(ctx, *, arg1):
-    if ctx.message.author.id in oid:
-        pass
-    else:
+    if ctx.message.author.id not in oid:
         await ctx.reply(f"You can\'t use this command")
-        print(f"[Cog] {ctx.author} returned an error: User Missing Permission.")
-        return
+        return print(f"[Cog] {ctx.author} returned an error: User Missing Permission.")
     try:
         bot.load_extension(f'cogs.{arg1}')
         await ctx.send("Loaded Cog")
         print(f"[Cog] {ctx.author} loaded cog.")
-        return
     except Exception as e:
         await ctx.send(e)
         print(f"[Cog] An unexpected error has occurred: {e}")
 
 @bot.command()
 async def unload(ctx, *, arg1):
-    if ctx.message.author.id in oid:
-        pass
-    else:
+    if ctx.message.author.id not in oid:
         await ctx.reply(f"You can\'t use this command")
-        print(f"[Cog] {ctx.author} returned an error: User Missing Permission.")
-        return
+        return print(f"[Cog] {ctx.author} returned an error: User Missing Permission.")
     try:
         bot.unload_extension(f'cogs.{arg1}')
         await ctx.send("Unloaded Cog")
         print(f"[Cog] {ctx.author} unloaded cog.")
-        return
     except Exception as e:
         await ctx.send(e)
         print(f"[Cog] An unexpected error has occurred: {e}")
         
 @bot.command()
 async def reload(ctx, *, arg1):
-    if ctx.message.author.id in oid:
-        pass
-    else:
+    if ctx.message.author.id not in oid:
         await ctx.reply(f"You can\'t use this command")
-        print(f"[Cog] {ctx.author} returned an error: User Missing Permission.")
-        return
+        return print(f"[Cog] {ctx.author} returned an error: User Missing Permission.")
     try:
         bot.unload_extension(f'cogs.{arg1}')
         bot.load_extension(f'cogs.{arg1}')
         await ctx.send("Reloaded Cog")
         print(f"[log] {ctx.author} reloaded cog.")
-        return
     except Exception as e:
         await ctx.send(e)
         print(f"[Cog] An unexpected error has occurred: {e}")
